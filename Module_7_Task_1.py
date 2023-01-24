@@ -75,4 +75,4 @@ for i in range(number_cards):
     if name_to_send == BaseContacts_Book[i].name:
         BaseContact.contact(BaseContacts_Book[i])
         print("Legth Name and Surname: ", BaseContact.length_name(BaseContacts_Book[i]))
-        break
+        print("-------------------------")
