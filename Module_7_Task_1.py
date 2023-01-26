@@ -1,7 +1,7 @@
 from faker import Faker
 fake = Faker()
 
-class BaseContact:
+class Base_Contact:
     def __init__(self,
                 name: str,
                 surname: str,
@@ -13,29 +13,29 @@ class BaseContact:
         self.phone_number = phone_number
         self.email = email
     
-    def __str__(self) -> str:
+    def str(self) -> str:
         return f'{self.name} {self.surname} {self.email}'
 
     def length_name(self):
         return len(self.name + ' ' + self.surname)
   
-    def contact(self):
-        print("Connecting with ...")
-        print(f' {self.name} \n {self.surname} \n {self.email}')
-        print(f'I dial {self.phone_number} and call to {self.name} {self.surname}.')
+    def contact(self):        
+        string1 = f" {self.name}\n {self.surname}\n {self.email}\n {self.company_name}\n {self.position}\n"
+        string2 = f"I dial {self.phone_number} and call to {self.name} {self.surname}."
+        return string1 + string2
 
-class BusinessContact(BaseContact):
+class Business_Contact(Base_Contact):
     def __init__(self, company_name, position, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.company_name = company_name
         self.position = position
 
-BaseContacts_Book = []
+base_contact_book = []
 
 number_cards = int(input("Number of business cards: "))
 
 for j in range(number_cards):    
-    BaseContacts_Book.append(BusinessContact(name = fake.first_name(), 
+    base_contact_book.append(Business_Contact(name = fake.first_name(), 
                                         surname = fake.last_name(), 
                                         phone_number = fake.phone_number(),
                                         email = fake.email(),
@@ -43,23 +43,24 @@ for j in range(number_cards):
                                         position = "Occupational social worker"))
 
 for i in range(number_cards):    
-    print(BaseContact.__str__(BaseContacts_Book[i]))
+    print(Base_Contact.str(base_contact_book[i]))
 print("--------- Sorted by name -------")
-by_name = sorted(BaseContacts_Book, key=lambda Busines_Card: Busines_Card.name)
+by_name = sorted(base_contact_book, key=lambda Busines_Card: Busines_Card.name)
 for i in range(number_cards):    
-    print(BaseContact.__str__(by_name[i]))
+    print(Base_Contact.str(by_name[i]))
 print("--------- Sorted by surname ----")
-by_surname = sorted(BaseContacts_Book, key=lambda Busines_Card: Busines_Card.surname)
+by_surname = sorted(base_contact_book, key=lambda Busines_Card: Busines_Card.surname)
 for i in range(number_cards):    
-    print(BaseContact.__str__(by_surname[i]))
+    print(Base_Contact.str(by_surname[i]))
 print("--------- Sorted by email ------")
-by_email = sorted(BaseContacts_Book, key=lambda Busines_Card: Busines_Card.email)
+by_email = sorted(base_contact_book, key=lambda Busines_Card: Busines_Card.email)
 for i in range(number_cards):    
-    print(BaseContact.__str__(by_email[i]))
+    print(Base_Contact.str(by_email[i]))
 print("--------- Send an email and call -------")
 name_to_send = input("Enter the recipient's name: ")
 for i in range(number_cards):
-    if name_to_send == BaseContacts_Book[i].name:
-        BaseContact.contact(BaseContacts_Book[i])
-        print("Legth Name and Surname: ", BaseContact.length_name(BaseContacts_Book[i]))
+    if name_to_send == base_contact_book[i].name:
+        print("Connecting with ...")
+        print(Base_Contact.contact(base_contact_book[i]))
+        print("Legth Name and Surname: ", Base_Contact.length_name(base_contact_book[i]))
         break
