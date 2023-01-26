@@ -19,10 +19,10 @@ class Base_Contact:
     def length_name(self):
         return len(self.name + ' ' + self.surname)
   
-    def contact(self):        
-        string1 = f" {self.name}\n {self.surname}\n {self.email}\n {self.company_name}\n {self.position}\n"
-        string2 = f"I dial {self.phone_number} and call to {self.name} {self.surname}."
-        return string1 + string2
+    def contact(self):
+        print("Connecting with ...")
+        print(f' {self.name} \n {self.surname} \n {self.email} \n {self.company_name} \n {self.position}')
+        print(f'I dial {self.phone_number} and call to {self.name} {self.surname}.')
 
 class Business_Contact(Base_Contact):
     def __init__(self, company_name, position, *args, **kwargs):
@@ -60,7 +60,6 @@ print("--------- Send an email and call -------")
 name_to_send = input("Enter the recipient's name: ")
 for i in range(number_cards):
     if name_to_send == base_contact_book[i].name:
-        print("Connecting with ...")
-        print(Base_Contact.contact(base_contact_book[i]))
+        base_contact_book[i].contact() 
         print("Legth Name and Surname: ", Base_Contact.length_name(base_contact_book[i]))
         break
