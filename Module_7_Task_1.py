@@ -1,7 +1,7 @@
 from faker import Faker
 fake = Faker()
 
-class Base_Contact:
+class BaseContact:
     def __init__(self,
                 name: str,
                 surname: str,
@@ -24,7 +24,7 @@ class Base_Contact:
         print(f' {self.name} \n {self.surname} \n {self.email} \n {self.company_name} \n {self.position}')
         print(f'I dial {self.phone_number} and call to {self.name} {self.surname}.')
 
-class Business_Contact(Base_Contact):
+class BusinessContact(BaseContact):
     def __init__(self, company_name, position, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.company_name = company_name
@@ -35,31 +35,31 @@ base_contact_book = []
 number_cards = int(input("Number of business cards: "))
 
 for j in range(number_cards):    
-    base_contact_book.append(Business_Contact(name = fake.first_name(), 
+    base_contact_book.append(BusinessContact(name = fake.first_name(), 
                                         surname = fake.last_name(), 
                                         phone_number = fake.phone_number(),
                                         email = fake.email(),
                                         company_name = fake.company(), 
                                         position = "Occupational social worker"))
 
-for i in range(number_cards):    
-    print(Base_Contact.str(base_contact_book[i]))
+for card in base_contact_book:   
+    print(BaseContact.str(card))
 print("--------- Sorted by name -------")
-by_name = sorted(base_contact_book, key=lambda Busines_Card: Busines_Card.name)
-for i in range(number_cards):    
-    print(Base_Contact.str(by_name[i]))
+by_name = sorted(base_contact_book, key=lambda card: card.name)
+for card in by_name:
+    print(BaseContact.str(card))
 print("--------- Sorted by surname ----")
-by_surname = sorted(base_contact_book, key=lambda Busines_Card: Busines_Card.surname)
-for i in range(number_cards):    
-    print(Base_Contact.str(by_surname[i]))
+by_surname = sorted(base_contact_book, key=lambda card: card.surname)
+for card in by_surname:
+    print(BaseContact.str(card))
 print("--------- Sorted by email ------")
-by_email = sorted(base_contact_book, key=lambda Busines_Card: Busines_Card.email)
-for i in range(number_cards):    
-    print(Base_Contact.str(by_email[i]))
+by_email = sorted(base_contact_book, key=lambda card: card.email)
+for card in by_email:
+    print(BaseContact.str(card))
 print("--------- Send an email and call -------")
 name_to_send = input("Enter the recipient's name: ")
-for i in range(number_cards):
-    if name_to_send == base_contact_book[i].name:
-        base_contact_book[i].contact() 
-        print("Legth Name and Surname: ", Base_Contact.length_name(base_contact_book[i]))
+for card in base_contact_book:
+    if name_to_send == card.name:
+        card.contact() 
+        print("Legth Name and Surname: ", card.length_name())
         break
