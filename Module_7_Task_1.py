@@ -13,9 +13,9 @@ class BaseContact:
         self.phone_number = phone_number
         self.email = email
     
-    def str(self) -> str:
+    def __str__(self):
         return f'{self.name} {self.surname} {self.email}'
-
+    
     def length_name(self):
         return len(self.name + ' ' + self.surname)
   
@@ -43,19 +43,19 @@ for j in range(number_cards):
                                         position = "Occupational social worker"))
 
 for card in base_contact_book:   
-    print(BaseContact.str(card))
+    print(card)
 print("--------- Sorted by name -------")
 by_name = sorted(base_contact_book, key=lambda card: card.name)
 for card in by_name:
-    print(BaseContact.str(card))
+    print(card)
 print("--------- Sorted by surname ----")
 by_surname = sorted(base_contact_book, key=lambda card: card.surname)
 for card in by_surname:
-    print(BaseContact.str(card))
+    print(card)
 print("--------- Sorted by email ------")
 by_email = sorted(base_contact_book, key=lambda card: card.email)
 for card in by_email:
-    print(BaseContact.str(card))
+    print(card)
 print("--------- Send an email and call -------")
 name_to_send = input("Enter the recipient's name: ")
 for card in base_contact_book:
